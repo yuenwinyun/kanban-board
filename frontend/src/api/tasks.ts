@@ -1,17 +1,32 @@
 import type { BoardData } from '../types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.50.218:8081';
+const STORAGE_KEY = 'kanban-board-data';
 
-export async function fetchTasks(): Promise<BoardData> {
-  const res = await fetch(`${API_URL}/api/tasks`);
-  if (!res.ok) throw new Error('Failed to fetch tasks');
-  return res.json();
+const defaultData: BoardData = {
+  todo: [],
+  progress: [],
+  done: [],
+};
+
+export function loadTasks(): BoardData {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (!stored) return defaultData;
+  try {
+    return JSON.parse(stored) as BoardData;
+  } catch {
+    return defaultData;
+  }
 }
 
-export async function saveTasks(data: BoardData): Promise<void> {
-  await fetch(`${API_URL}/api/tasks`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
+export function saveTasks(data: BoardData): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+// Keep these for API compatibility (no-op)
+export async function fetchTasks(): Promise<BoardData> {
+  return loadTasks();
+}
+
+export async function saveTasksAsync(data: BoardData): Promise<void> {
+  saveTasks(data);
 }
