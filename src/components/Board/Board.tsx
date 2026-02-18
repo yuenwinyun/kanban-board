@@ -1,5 +1,4 @@
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import type { DragEndEvent } from '@dnd-kit/core';
+import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core';
 import { Column } from '../Column/Column';
 import { COLUMNS, type ColumnId, type BoardData } from '../../types';
 import './Board.css';
