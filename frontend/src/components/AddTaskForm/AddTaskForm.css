@@ -1,0 +1,56 @@
+.add-form {
+  padding: 0 12px 12px;
+}
+
+.add-form textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  line-height: 1.45;
+}
+
+.add-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.form-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.15s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: none;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+}

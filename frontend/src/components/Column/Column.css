@@ -1,0 +1,82 @@
+.column {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.column-header {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.column-header .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.column-header .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.column-header h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.count {
+  background: var(--border);
+  font-size: 0.75rem;
+  padding: 1px 8px;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.add-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  transition: 0.15s;
+  line-height: 1;
+}
+
+.add-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.task-list {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  min-height: 60px;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 24px 12px;
+}
