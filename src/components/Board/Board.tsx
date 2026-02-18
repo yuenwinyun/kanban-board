@@ -1,6 +1,7 @@
 import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core';
 import { Column } from '../Column/Column';
-import { COLUMNS, type ColumnId, type BoardData } from '../../types';
+import { COLUMNS } from '../../types';
+import type { ColumnId, BoardData } from '../../types';
 import './Board.css';
 
 interface BoardProps {
@@ -49,7 +50,9 @@ export function Board({ data, onMoveTask, onAddTask, onDeleteTask }: BoardProps)
       }
     }
 
-    if (fromCol !== toCol || data[fromCol].findIndex((t) => t.id !== activeId) !== newIndex) {
+    const currentIndex = data[fromCol].findIndex((t) => t.id === activeId);
+
+    if (fromCol !== toCol || currentIndex !== newIndex) {
       onMoveTask(activeId, fromCol, toCol, newIndex);
     }
   };
