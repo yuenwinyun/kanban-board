@@ -16,7 +16,7 @@ export function Card({ task, onDelete }: CardProps) {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: task.id });
+  } = useSortable({ id: task.id } as any);
 
   const style = {
     transform: CSS.Transform.toString(transform),
