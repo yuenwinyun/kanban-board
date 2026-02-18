@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { Board } from './components/Board';
-import { fetchTasks, saveTasks } from './api/tasks';
+import { loadTasks, saveTasks } from './api/tasks';
 import type { BoardData, ColumnId, Task } from './types';
 import './App.css';
 
@@ -10,29 +10,11 @@ function uid() {
 }
 
 function App() {
-  const [data, setData] = useState<BoardData>({
-    todo: [],
-    progress: [],
-    done: [],
-  });
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<BoardData>(loadTasks);
 
-  // Load tasks on mount
-  useEffect(() => {
-    fetchTasks()
-      .then(setData)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
-
-  // Save tasks whenever data changes
-  const persistData = useCallback(async (newData: BoardData) => {
+  const persistData = useCallback((newData: BoardData) => {
     setData(newData);
-    try {
-      await saveTasks(newData);
-    } catch (e) {
-      console.error('Failed to save:', e);
-    }
+    saveTasks(newData);
   }, []);
 
   const handleAddTask = (columnId: ColumnId, text: string) => {
@@ -71,14 +53,6 @@ function App() {
     ];
     persistData(newData);
   };
-
-  if (loading) {
-    return (
-      <div className="loading">
-        <div className="spinner" />
-      </div>
-    );
-  }
 
   return (
     <>
