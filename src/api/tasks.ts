@@ -3,9 +3,17 @@ import type { BoardData } from '../types';
 const STORAGE_KEY = 'kanban-board-data';
 
 const defaultData: BoardData = {
-  todo: [],
-  progress: [],
-  done: [],
+  todo: [
+    { id: 'mock-1', text: 'Welcome to Kanban! 🎉' },
+    { id: 'mock-2', text: 'Click + to add a task' },
+    { id: 'mock-3', text: 'Drag tasks between columns' },
+  ],
+  progress: [
+    { id: 'mock-4', text: 'This is a task in progress' },
+  ],
+  done: [
+    { id: 'mock-5', text: 'Completed task example' },
+  ],
 };
 
 export function loadTasks(): BoardData {
