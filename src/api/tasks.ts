@@ -1,17 +1,9 @@
 import { supabase, type BoardData, type Task, type ColumnId } from './supabase';
 
-const defaultData: BoardData = {
-  todo: [
-    { id: 'mock-1', column_id: 'todo', text: 'Welcome to Kanban! 🎉', position: 0, created_at: '', updated_at: '' },
-    { id: 'mock-2', column_id: 'todo', text: 'Click + to add a task', position: 1, created_at: '', updated_at: '' },
-    { id: 'mock-3', column_id: 'todo', text: 'Drag tasks between columns', position: 2, created_at: '', updated_at: '' },
-  ],
-  progress: [
-    { id: 'mock-4', column_id: 'progress', text: 'This is a task in progress', position: 0, created_at: '', updated_at: '' },
-  ],
-  done: [
-    { id: 'mock-5', column_id: 'done', text: 'Completed task example', position: 0, created_at: '', updated_at: '' },
-  ],
+const emptyData: BoardData = {
+  todo: [],
+  progress: [],
+  done: [],
 };
 
 function groupByColumn(tasks: Task[]): BoardData {
@@ -37,10 +29,10 @@ function groupByColumn(tasks: Task[]): BoardData {
 }
 
 export async function loadTasks(): Promise<BoardData> {
-  // If Supabase is not configured, return default data
+  // If Supabase is not configured, return empty data
   if (!supabase) {
-    console.warn('Supabase not configured, using default data');
-    return defaultData;
+    console.warn('Supabase not configured, using empty data');
+    return emptyData;
   }
 
   const { data, error } = await supabase
@@ -50,11 +42,11 @@ export async function loadTasks(): Promise<BoardData> {
 
   if (error) {
     console.error('Failed to load tasks:', error);
-    return defaultData;
+    return emptyData;
   }
 
   if (!data || data.length === 0) {
-    return defaultData;
+    return emptyData;
   }
 
   return groupByColumn(data);
