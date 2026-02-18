@@ -1,11 +1,6 @@
-export interface Task {
-  id: string;
-  text: string;
-}
+import type { ColumnId } from './api/supabase';
 
-export type ColumnId = 'todo' | 'progress' | 'done';
-
-export type BoardData = Record<ColumnId, Task[]>;
+export type { Task, ColumnId, BoardData } from './api/supabase';
 
 export interface ColumnConfig {
   id: ColumnId;
